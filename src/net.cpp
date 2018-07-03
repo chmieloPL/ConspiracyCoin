@@ -1193,13 +1193,13 @@ void MapPort(bool)
 // The second name should resolve to a list of seed addresses.
 
 static const char *strMainNetDNSSeed[][2] = {
-    {"conspiracycoin.org", "seeder1.conspiracycoin.org"},
-    {"conspiracycoin.org", "seeder2.conspiracycoin.org"},
-    {"conspiracycoin.org", "seeder3.conspiracycoin.org"},
-    {"conspiracycoin.org", "seeder4.conspiracycoin.org"},
-    {"conspiracycoin.org", "seeder5.conspiracycoin.org"},
-    {"conspiracycoin.org", "seeder6.conspiracycoin.org"},
-    {"conspiracycoin.org", "seeder7.conspiracycoin.org"},
+    {"burzuj.net", "cyc.burzuj.net"},
+    {"burzuj.net", "cyc2.burzuj.net"},
+    {"burzuj.net", "cyc3.burzuj.net"},
+    {"burzuj.net", "cyc4.burzuj.net"},
+    {"burzuj.net", "cyc5.burzuj.net"},
+    {"burzuj.net", "cyc6.burzuj.net"},
+    {"burzuj.net", "cyc7.burzuj.net"},
     {NULL, NULL},
 };
 
