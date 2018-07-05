@@ -1810,20 +1810,9 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     int64 nTime = GetTimeMicros() - nStart;
     if (fBenchmark)
         printf("- Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin)\n", (unsigned)vtx.size(), 0.001 * nTime, 0.001 * nTime / vtx.size(), nInputs <= 1 ? 0 : 0.001 * nTime / (nInputs-1));
-    if ( pindex->pprev->nHeight % 5000 != 0 && pindex->pprev->nHeight > 1)  {  	    
-    	    if (vtx[0].GetValueOut() > GetBlockValue(pindex->pprev->nBits, pindex->pprev->nHeight, nFees))
-    	    	return state.DoS(100, error("ConnectBlock() : coinbase pays too much (actual=%"PRI64d" vs limit=%"PRI64d")", vtx[0].GetValueOut(), GetBlockValue(pindex->pprev->nBits, pindex->pprev->nHeight, nFees)));
-    }
-    else if ( pindex->pprev->nHeight > 11000){
-    	    CBitcoinAddress address(FOUNDATION);                	
-            CScript scriptPubKey;
-            scriptPubKey.SetDestination(address.Get());
-            if (vtx[0].vout[0].scriptPubKey != scriptPubKey)
-            	    return error("ConnectBlock() : Incorrect foundation address");
-            if (pindex->pprev->nHeight > 46000 && (vtx[0].vout[0].nValue != (FOUNDATION_SUPPORT * COIN) || vtx[0].GetValueOut()!= (FOUNDATION_SUPPORT * COIN)))
-            	    return error("ConnectBlock() : Incorrect foundation coinbase (actual=%"PRI64d" vs limit=%"PRI64d")", vtx[0].vout[0].nValue, FOUNDATION_SUPPORT * COIN);            
-    }
-
+   	    
+    if (vtx[0].GetValueOut() > GetBlockValue(pindex->pprev->nBits, pindex->pprev->nHeight, nFees))
+       	return state.DoS(100, error("ConnectBlock() : coinbase pays too much (actual=%"PRI64d" vs limit=%"PRI64d")", vtx[0].GetValueOut(), GetBlockValue(pindex->pprev->nBits, pindex->pprev->nHeight, nFees)));
     
     if (!control.Wait())
         return state.DoS(100, false);
